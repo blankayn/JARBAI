@@ -1,0 +1,43 @@
+brain:
+  # auto  - use Gemini when online, fall back to the local model when not
+  # local - always Ollama (private, offline, slower)
+  # cloud - always Gemini (needs GEMINI_API_KEY in .env)
+  provider: auto
+  gemini_model: gemini-flash-lite-latest
+  model: qwen2.5:3b
+  base_url: http://127.0.0.1:11434
+  temperature: 0.4
+  max_history: 10
+
+voice:
+  tts_engine: edge-tts
+  edge_voice: en-GB-RyanNeural
+  rate: "+12%"
+  pyttsx3_voice_index: 0
+
+ears:
+  wake_word: jarbai          # matched in the transcript, so any phrase works
+  ambient_model: base        # tiny/base/small - ambient transcribes constantly
+  stt_provider: auto         # auto | local | cloud  (auto = Gemini, local when offline)
+  whisper_model: base        # base/small - base is ~2x faster, slightly less sharp
+  snap_enabled: true
+  snap:                      # run: python main.py --tune-snap
+    min_peak: 0.25           # lower if your snaps are missed
+    min_crest: 6.0           # peak/rms - separates an impulse from speech
+    min_high: 0.45           # share of energy above 2 kHz
+  porcupine_access_key: "PASTE_YOUR_PICIVOICE_ACCESS_KEY"
+  silence_threshold: 0.02
+  speech_timeout: 12
+  silence_after_speech: 1.2
+
+behavior:
+  wake_response: "Yes, sir?"
+  speak_errors: true
+
+apps:
+  browser: "msedge.exe"
+  editor: "code"
+  spotify: "spotify"
+
+files:
+  workspace: "~/Documents/JARBAI"

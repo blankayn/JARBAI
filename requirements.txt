@@ -1,0 +1,15 @@
+pyyaml>=6.0
+requests>=2.31
+numpy>=1.26
+sounddevice>=0.4.6
+pvporcupine>=3.0.2
+faster-whisper>=1.0.3
+edge-tts>=6.1.12
+miniaudio>=1.59
+pyttsx3>=2.90
+psutil>=5.9.0
+pycaw>=20240214
+comtypes>=1.2.0
+pyautogui>=0.9.54
+pytest>=8.0.0
+winsdk>=1.0.0b10

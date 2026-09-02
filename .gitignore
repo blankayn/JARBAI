@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+temp/
+*.mp3
+Screenshots/
+.pytest_cache/
+.env
+.cache/
+settings.json
+memory.json
+reminders.json
+.claude/

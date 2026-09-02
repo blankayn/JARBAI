@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>J.A.R.B.A.I</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-state="idle">
+
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5"/><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="M9 1.5v2M12 1.5v2M15 1.5v2M9 20.5v2M12 20.5v2M15 20.5v2M1.5 9h2M1.5 12h2M1.5 15h2M20.5 9h2M20.5 12h2M20.5 15h2"/></symbol>
+  <symbol id="i-ram" viewBox="0 0 24 24"><path d="M2 6h20v9H2z"/><path d="M6 15v3M10 15v3M14 15v3M18 15v3M6 9v3M10 9v3M14 9v3M18 9v3"/></symbol>
+  <symbol id="i-disk" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8.5" ry="3.2"/><path d="M3.5 6v12c0 1.8 3.8 3.2 8.5 3.2s8.5-1.4 8.5-3.2V6"/><path d="M3.5 12c0 1.8 3.8 3.2 8.5 3.2s8.5-1.4 8.5-3.2"/></symbol>
+  <symbol id="i-net" viewBox="0 0 24 24"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a11 11 0 0 1 14 0M8 15.5a6 6 0 0 1 8 0"/><circle cx="12" cy="19.5" r="1.2"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M3 11.5 21 3l-8.5 18-2.2-7.3z"/><path d="M10.3 13.7 21 3"/></symbol>
+  <symbol id="i-vol-up" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z"/><path d="M15.5 9a4.5 4.5 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></symbol>
+  <symbol id="i-vol-down" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z"/><path d="M15.5 9a4.5 4.5 0 0 1 0 6"/></symbol>
+  <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z"/><path d="m16 9.5 5 5M21 9.5l-5 5"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10.5" width="16" height="10.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/><circle cx="12" cy="15.7" r="1.3"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M3 7.5h4l1.5-2.5h7L17 7.5h4v12H3z"/><circle cx="12" cy="13" r="3.6"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-act" viewBox="0 0 24 24"><path d="M2 12h4l3-8 6 16 3-8h4"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 3v9"/><path d="M6.8 6.8a9 9 0 1 0 10.4 0"/></symbol>
+  <symbol id="i-wake" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.5"/><path d="M7.8 7.8a6 6 0 0 0 0 8.4M16.2 16.2a6 6 0 0 0 0-8.4"/><path d="M4.9 4.9a10 10 0 0 0 0 14.2M19.1 19.1a10 10 0 0 0 0-14.2"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 9 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 4.6 9a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12.5 5 5L20 6.5"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 9a6 6 0 1 0-12 0c0 5-2.5 6.5-2.5 6.5h17S18 14 18 9"/><path d="M10.3 19.5a2 2 0 0 0 3.4 0"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+</svg>
+
+<div class="app">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="brand">
+      <h1>J.A.R.B.A.I</h1>
+      <p>Just A Rather Brilliant Artificial Intelligence</p>
+    </div>
+
+    <div class="clock">
+      <div class="clock-date" id="date">&mdash;</div>
+      <div class="clock-time" id="time">--:--:--</div>
+    </div>
+
+    <div class="topbar-right">
+      <div class="brain-switch" id="brainSwitch" title="Which brain answers: auto falls back to local when offline">
+        <span class="brain-label">BRAIN</span>
+        <button data-p="auto">AUTO</button><button data-p="cloud">CLOUD</button><button data-p="local">LOCAL</button>
+      </div>
+      <div class="link-state" id="linkState" data-ok="1">
+        <span class="dot"></span><span id="linkLabel">LINK ACTIVE</span>
+      </div>
+      <button class="icon-btn" id="btnSetup" title="Setup &amp; API key">
+        <svg><use href="#i-gear"/></svg>
+      </button>
+      <button class="icon-btn" id="btnWake" title="Always listen for &quot;Jarbai&quot;" aria-pressed="false">
+        <svg><use href="#i-wake"/></svg>
+      </button>
+      <button class="icon-btn" id="btnTts" title="Toggle spoken replies" aria-pressed="true">
+        <svg><use href="#i-vol-up"/></svg>
+      </button>
+      <button class="icon-btn" id="btnMicTop" title="Voice command (Ctrl+M)">
+        <svg><use href="#i-mic"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN GRID -->
+  <main class="grid">
+
+    <!-- LEFT COLUMN -->
+    <aside class="col">
+
+      <section class="panel greet">
+        <div class="greet-hello" id="greeting">Good evening</div>
+        <div class="greet-sub" id="greetSub">All systems nominal. How may I help?</div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>System Status</h2>
+          <span class="panel-meta" id="uptime">&mdash;</span>
+        </div>
+
+        <div class="metrics">
+          <div class="metric" data-k="cpu">
+            <svg class="metric-ico"><use href="#i-cpu"/></svg>
+            <span class="metric-name">CPU</span>
+            <div class="bar"><i></i></div>
+            <span class="metric-val">&mdash;</span>
+          </div>
+          <div class="metric" data-k="ram">
+            <svg class="metric-ico"><use href="#i-ram"/></svg>
+            <span class="metric-name">RAM</span>
+            <div class="bar"><i></i></div>
+            <span class="metric-val">&mdash;</span>
+          </div>
+          <div class="metric" data-k="disk">
+            <svg class="metric-ico"><use href="#i-disk"/></svg>
+            <span class="metric-name">DISK</span>
+            <div class="bar"><i></i></div>
+            <span class="metric-val">&mdash;</span>
+          </div>
+          <div class="metric" data-k="net">
+            <svg class="metric-ico"><use href="#i-net"/></svg>
+            <span class="metric-name">NET</span>
+            <div class="bar"><i></i></div>
+            <span class="metric-val">&mdash;</span>
+          </div>
+        </div>
+
+        <div class="submeta">
+          <span id="ramDetail">&mdash;</span>
+          <span id="netDetail">&mdash;</span>
+        </div>
+
+        <div class="cores" id="cores" title="Per-core load"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Quick Commands</h2>
+        </div>
+        <div class="cmds">
+          <button class="cmd" data-action="vol_up"><svg><use href="#i-vol-up"/></svg><span>Volume Up</span><svg class="cmd-chev"><use href="#i-chev"/></svg></button>
+          <button class="cmd" data-action="vol_down"><svg><use href="#i-vol-down"/></svg><span>Volume Down</span><svg class="cmd-chev"><use href="#i-chev"/></svg></button>
+          <button class="cmd" data-action="mute"><svg><use href="#i-mute"/></svg><span>Toggle Mute</span><svg class="cmd-chev"><use href="#i-chev"/></svg></button>
+          <button class="cmd" data-action="screenshot"><svg><use href="#i-camera"/></svg><span>Screenshot</span><svg class="cmd-chev"><use href="#i-chev"/></svg></button>
+          <button class="cmd" data-action="browser"><svg><use href="#i-globe"/></svg><span>Open Browser</span><svg class="cmd-chev"><use href="#i-chev"/></svg></button>
+          <button class="cmd danger" data-action="lock"><svg><use href="#i-lock"/></svg><span>Lock Station</span><svg class="cmd-chev"><use href="#i-chev"/></svg></button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Reminders</h2>
+          <button class="ghost-btn" id="btnAddRem"><svg><use href="#i-plus"/></svg>ADD</button>
+        </div>
+        <form class="addrow" id="remForm" hidden>
+          <input id="remText" placeholder="e.g. stretch in 20 minutes" required maxlength="90">
+          <button type="submit" title="Add reminder"><svg><use href="#i-plus"/></svg></button>
+        </form>
+        <div class="scroll rem-scroll" id="rems">
+          <div class="empty">No reminders armed, sir.</div>
+        </div>
+      </section>
+
+      <section class="panel grow">
+        <div class="panel-head">
+          <h2>Capabilities</h2>
+          <span class="panel-meta" id="skillCount">&mdash;</span>
+        </div>
+        <div class="scroll" id="skills">
+          <div class="empty">Querying registry&hellip;</div>
+        </div>
+      </section>
+
+      <section class="panel grow">
+        <div class="panel-head">
+          <h2>Active Processes</h2>
+          <span class="panel-meta">MEMORY</span>
+        </div>
+        <div class="scroll" id="procs">
+          <div class="empty">Awaiting telemetry&hellip;</div>
+        </div>
+      </section>
+
+    </aside>
+
+    <!-- CENTER : NEURAL CORE -->
+    <section class="core-col">
+
+      <div class="core-title">
+        <span class="tick"></span>
+        <h2>Neural Network Core</h2>
+        <span class="tick"></span>
+      </div>
+
+      <div class="core-stage" id="coreStage">
+        <canvas id="neural"></canvas>
+        <div class="core-readout">
+          <span class="core-state" id="coreState">ONLINE</span>
+          <span class="core-sep"></span>
+          <span class="core-load" id="coreLoad">LOAD 0%</span>
+        </div>
+      </div>
+
+      <div class="feed" id="feed"></div>
+
+      <div class="cmdbar">
+        <button class="mic" id="btnMic" title="Open voice channel (Ctrl+M)">
+          <svg><use href="#i-mic"/></svg>
+        </button>
+        <input id="input" type="text" autocomplete="off" spellcheck="false"
+               placeholder="Speak or type your command&hellip;">
+        <canvas id="wave"></canvas>
+        <button class="send" id="btnSend" title="Send (Enter)">
+          <svg><use href="#i-send"/></svg>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- RIGHT COLUMN -->
+    <aside class="col">
+
+      <section class="panel grow">
+        <div class="panel-head">
+          <h2>Task Manager</h2>
+          <button class="ghost-btn" id="btnAddTask"><svg><use href="#i-plus"/></svg>NEW TASK</button>
+        </div>
+        <form class="addrow" id="taskForm" hidden>
+          <input id="taskText" placeholder="Task description" required maxlength="80">
+          <input id="taskWhen" type="datetime-local">
+          <button type="submit" title="Add task"><svg><use href="#i-plus"/></svg></button>
+        </form>
+        <div class="scroll" id="tasks"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Weather</h2>
+          <input class="city-input" id="city" spellcheck="false" title="Type a city and press Enter">
+        </div>
+        <div class="wx" id="wx">
+          <div class="empty">Contacting weather relay&hellip;</div>
+        </div>
+      </section>
+
+      <section class="panel grow">
+        <div class="panel-head">
+          <h2>Upcoming Events</h2>
+          <button class="ghost-btn" id="btnAddEvent"><svg><use href="#i-plus"/></svg>ADD</button>
+        </div>
+        <form class="addrow" id="eventForm" hidden>
+          <input id="eventText" placeholder="Event title" required maxlength="80">
+          <input id="eventWhen" type="datetime-local" required>
+          <button type="submit" title="Add event"><svg><use href="#i-plus"/></svg></button>
+        </form>
+        <div class="scroll" id="events"></div>
+      </section>
+
+    </aside>
+  </main>
+
+  <!-- STATUS STRIP -->
+  <footer class="statusbar">
+    <span><svg><use href="#i-power"/></svg><b id="sbUptime">&mdash;</b> UPTIME</span>
+    <span><svg><use href="#i-cpu"/></svg><b id="sbCores">&mdash;</b> LOGICAL CORES</span>
+    <span><svg><use href="#i-act"/></svg><b id="sbNet">&mdash;</b> THROUGHPUT</span>
+    <span class="sb-spacer"></span>
+    <span class="sb-hint"><kbd>/</kbd> command <kbd>Ctrl</kbd><kbd>M</kbd> voice</span>
+  </footer>
+
+  <div class="frame-corner tl"></div><div class="frame-corner tr"></div>
+  <div class="frame-corner bl"></div><div class="frame-corner br"></div>
+</div>
+
+<!-- SETUP -->
+<div class="modal" id="setup" hidden>
+  <div class="modal-card">
+    <div class="modal-head">
+      <h2>Setup</h2>
+      <button class="modal-x" id="setupClose" title="Close"><svg><use href="#i-x"/></svg></button>
+    </div>
+
+    <div class="setup-status" id="setupStatus"></div>
+
+    <div class="setup-block">
+      <h3>Cloud brain &mdash; Google AI Studio</h3>
+      <p class="setup-help">
+        Faster replies and better transcription, but needs internet and your
+        commands are sent to Google. Optional &mdash; JARBAI runs fully offline without it.
+      </p>
+      <ol class="setup-steps">
+        <li>Open <span class="mono">aistudio.google.com/apikey</span> and sign in</li>
+        <li>Click <b>Create API key</b> &mdash; the free tier is enough</li>
+        <li>Copy it and paste below</li>
+      </ol>
+      <div class="setup-row">
+        <input id="keyInput" type="password" autocomplete="off" spellcheck="false"
+               placeholder="Paste your API key here">
+        <button class="btn-primary" id="keySave">SAVE &amp; TEST</button>
+      </div>
+      <div class="setup-row-sub">
+        <button class="btn-ghost" id="keyShow" type="button">Show</button>
+        <button class="btn-ghost danger" id="keyClear" type="button">Remove key</button>
+        <span class="setup-note">Stored in <span class="mono">.env</span>, never committed to git.</span>
+      </div>
+    </div>
+
+    <div class="setup-block">
+      <h3>Local brain &mdash; Ollama</h3>
+      <p class="setup-help">Private and works with no internet. Slower on a laptop CPU.</p>
+      <ol class="setup-steps">
+        <li>Install from <span class="mono">ollama.com/download</span></li>
+        <li>Run <span class="mono">ollama pull qwen2.5:3b</span></li>
+        <li>Leave it running &mdash; JARBAI starts it automatically</li>
+      </ol>
+    </div>
+
+    <div class="setup-block">
+      <h3>New machine?</h3>
+      <p class="setup-help">
+        Copy this folder over, then run <span class="mono">setup.ps1</span> in PowerShell.
+        It creates the virtualenv, installs everything, makes the icon and adds the
+        desktop shortcut. Paste your API key here afterwards.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<script src="neural.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
